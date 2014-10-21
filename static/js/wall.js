@@ -68,3 +68,19 @@ function displayResultStatus(resultMsg) {
         }, 2000);
     });
 }
+
+function getMessage (){
+    $.get("/api/wall/list", function(data){
+            // console.log(data);
+        $("#message-container").empty();
+
+        for (var i=0; i<data.messages.length; i++) {
+            var message_text = data.messages[i].message;
+            $('#message-container').append('<li class="list-group-item">' +
+                message_text + '</li>');
+        }
+    }
+    );
+}
+
+getMessage();
