@@ -28,7 +28,6 @@ def wall_error(error):
         "result": error,
     }
 
-
 def wall_list():
     """Get messages.
 
@@ -57,5 +56,13 @@ def wall_add(msg):
 
     result = wall_list()
     result["result"] = "Message Received"
+
+    return result
+
+def wall_clear():
+    session['wall'] =DEFAULT_MESSAGES
+
+    result = wall_list()
+    result["result"] = "Wall Cleared"
 
     return result

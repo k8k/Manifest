@@ -4,8 +4,16 @@ $(document).ready(function () {
     // function, this code only gets run when the document finishing loading.
 
     $("#message-form").submit(handleFormSubmit);
+    getMessage();
 });
 
+function handleButtonClear() {
+    $.get("/api/wall/list", function (data) {
+        data.messages = [];
+        $("#message-container").empty();
+    });
+
+}
 
 /**
  * Handle submission of the form.
@@ -21,6 +29,8 @@ function handleFormSubmit(evt) {
 
     // Reset the message container to be empty
     textArea.val("");
+
+    getMessage();
 }
 
 
@@ -76,11 +86,15 @@ function getMessage (){
 
         for (var i=0; i<data.messages.length; i++) {
             var message_text = data.messages[i].message;
-            $('#message-container').append('<li class="list-group-item">' +
+            $('#message-container').prepend('<li class="list-group-item">' +
                 message_text + '</li>');
         }
     }
     );
 }
 
-getMessage();
+    $("#message-clear").click(function(){
+        $.get('/api/wall/clear', function(result){
+            getMessage();
+        });
+    });
