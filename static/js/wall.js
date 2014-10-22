@@ -6,15 +6,6 @@ $(document).ready(function () {
     $("#message-form").submit(handleFormSubmit);
     getMessage();
 });
-
-function handleButtonClear() {
-    $.get("/api/wall/list", function (data) {
-        data.messages = [];
-        $("#message-container").empty();
-    });
-
-}
-
 /**
  * Handle submission of the form.
  */
@@ -31,6 +22,10 @@ function handleFormSubmit(evt) {
     textArea.val("");
 
     getMessage();
+
+    // setInterval(function() {
+    //     $('#message-form').prop('disabled',true);
+    //     },5000);
 }
 
 
@@ -73,6 +68,12 @@ function displayResultStatus(resultMsg) {
         // many JS programmers use the name "self"; some others use "that".
         var self = this;
 
+        $("#message-send").prop('disabled',true);
+
+        setTimeout(function () {
+        $("#message-send").prop('disabled',false);
+        }, 5000);
+
         setTimeout(function () {
             $(self).slideUp();
         }, 2000);
@@ -93,8 +94,8 @@ function getMessage (){
     );
 }
 
-    $("#message-clear").click(function(){
-        $.get('/api/wall/clear', function(result){
-            getMessage();
-        });
+$("#message-clear").click(function(){
+    $.get('/api/wall/clear', function(result){
+        getMessage();
     });
+});
