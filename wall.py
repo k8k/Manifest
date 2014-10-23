@@ -1,4 +1,5 @@
 import json
+from HTMLParser import HTMLParser
 
 from flask import Flask, request, render_template, make_response
 
@@ -68,6 +69,9 @@ def add_message():
 
     elif msg == "":
         result = wall_error("Your message is empty")
+
+    # elif "<" or ">" in msg:
+    #     result = wall_error("stop being a dick")
 
     else:
         result = wall_add(msg)

@@ -21,7 +21,7 @@ function handleFormSubmit(evt) {
     // Reset the message container to be empty
     textArea.val("");
 
-    getMessage();
+ 
 
     // setInterval(function() {
     //     $('#message-form').prop('disabled',true);
@@ -39,6 +39,7 @@ function addMessage(msg) {
         function (data) {
             console.log("addMessage: ", data);
             displayResultStatus(data.result);
+            getMessage();
         }
     );
 }
@@ -49,7 +50,16 @@ function addMessage(msg) {
  * site (the message result) and then hide it a moment later.
  */
 function displayResultStatus(resultMsg) {
-    var notificationArea = $("#sent-result");
+    // var notificationArea = $("#sent-result");
+    // notificationArea.text(resultMsg);
+    // notificationArea.slideDown(function () {
+
+    var notificationArea;
+    if (resultMsg === "Message Received") {
+        notificationArea = $("#sent-result");}
+    else {
+        notificationArea = $("#error-result");}
+
     notificationArea.text(resultMsg);
     notificationArea.slideDown(function () {
         // In JavaScript, "this" is a keyword that means "the object this
@@ -71,24 +81,25 @@ function displayResultStatus(resultMsg) {
         $("#message-send").prop('disabled',true);
 
         setTimeout(function () {
-        $("#message-send").prop('disabled',false);
-        }, 5000);
-
-        setTimeout(function () {
             $(self).slideUp();
         }, 2000);
+
+        setTimeout(function () {
+        $("#message-send").prop('disabled',false);
+        }, 5000);
     });
 }
 
 function getMessage (){
     $.get("/api/wall/list", function(data){
-            // console.log(data);
+            console.log(data);
         $("#message-container").empty();
 
         for (var i=0; i<data.messages.length; i++) {
             var message_text = data.messages[i].message;
             $('#message-container').prepend('<li class="list-group-item">' +
                 message_text + '</li>');
+            // $("#list-group-item").text();
         }
     }
     );
