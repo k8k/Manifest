@@ -36,10 +36,10 @@ function addMessage(msg) {
     $.post(
         "/api/wall/add",
         {'m': msg},
-        function (data) {
-            console.log("addMessage: ", data);
+        function (data)
+        {
+            dislayMessages(data);
             displayResultStatus(data.result);
-            getMessage();
         }
     );
 }
@@ -92,21 +92,26 @@ function displayResultStatus(resultMsg) {
 
 function getMessage (){
     $.get("/api/wall/list", function(data){
-            console.log(data);
+            dislayMessages(data);
+            displayResultStatus(data.result);
+    }
+    );
+}
+
+$("#message-clear").click(function(){
+    $.get('/api/wall/clear', function(data){
+          dislayMessages(data);
+          displayResultStatus(data.result);
+    });
+});
+
+function dislayMessages(data){
+      console.log(data);
         $("#message-container").empty();
 
         for (var i=0; i<data.messages.length; i++) {
             var message_text = data.messages[i].message;
             $('#message-container').prepend('<li class="list-group-item">' +
                 message_text + '</li>');
-            // $("#list-group-item").text();
         }
-    }
-    );
 }
-
-$("#message-clear").click(function(){
-    $.get('/api/wall/clear', function(result){
-        getMessage();
-    });
-});

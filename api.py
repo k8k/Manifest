@@ -13,7 +13,7 @@ from HTMLParser import HTMLParser
 # So that you can play with the `get` API, we return a single
 # test message as the default.
 DEFAULT_MESSAGES = [
-    {'message': 'Welcome! (this is the built-in first message)'},
+    {'message': 'Welcome to chatting with yourself!'},
 ]
 
 
@@ -64,7 +64,7 @@ def wall_add(msg):
     return result
 
 def wall_clear():
-    session['wall'] =DEFAULT_MESSAGES
+    session['wall'] = DEFAULT_MESSAGES
 
     result = wall_list()
     result["result"] = "Wall Cleared"
