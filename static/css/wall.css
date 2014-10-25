@@ -1,3 +1,6 @@
+/*99E5AC*/
+
+
 #sent-result, #error-result {
     margin-top: 1em;
     display: none;
@@ -8,38 +11,41 @@ body {
 }
 
 h1 {
-    color: yellow;
+    color: #A9F5BC;
+    font-family: purisa;
 }
 
 #subtitle {
-    color: white;
+    color: #E0F8E6;
+    font-family: purisa;
 }
 .btn-primary  {
-    background-color: yellow;
-    color:black;
-    border: orange dotted;
+    background-color: black;
+    color:#E0F8E6;
+    border: gray dotted;
 }
 .btn-primary:hover {
     background-color: gray;
-    border: black solid;
-    color: orange;
+    border: darkgray solid;
+    color: black;
     font-family: ubuntu;
 
 }
 
 .btn-primary:focus {
-    background-color: orange;
-    border: black;
+    background-color: gray;
+    border: black solid 3px;
 
 }
 div.panel.panel-default {
     padding-bottom: 20px;
     padding-left: 20px;
+    background-color: #E0F8E6;
 }
 
 #message-send:disabled {
     background-color: gray;
-    border: darkgray;
+    border: black;
     color: black;
 }
 
@@ -47,12 +53,27 @@ div.panel.panel-default {
 
 }
 #sent-result {
-    background-color: yellow;
+    background-color: #E0F8E6;
     opacity: 0.7;
     color: black;
-    border: orange solid 3px;
+    border: gray solid 3px;
 }
 
 .glyphicon {
-    color: yellow;
+    color: #E0F8E6;
+}
+.glyphicon-cloud {
+    color: gray;
+}
+
+.glyphicon-pushpin {
+    color: gray;
+}
+
+#affirmation-container {
+    height: 50px;
+    width: 80%;
+    display: inline-block;
+    margin-bottom: 0;
+    margin-left: 20px;
 }

@@ -38,7 +38,7 @@ function addMessage(msg) {
         {'m': msg},
         function (data)
         {
-            dislayMessages(data);
+            displayMessages(data);
             displayResultStatus(data.result);
         }
     );
@@ -55,7 +55,7 @@ function displayResultStatus(resultMsg) {
     // notificationArea.slideDown(function () {
 
     var notificationArea;
-    if (resultMsg === "Message Received") {
+    if (resultMsg === "Destiny Manifested") {
         notificationArea = $("#sent-result");}
     else {
         notificationArea = $("#error-result");}
@@ -92,20 +92,22 @@ function displayResultStatus(resultMsg) {
 
 function getMessage (){
     $.get("/api/wall/list", function(data){
-            dislayMessages(data);
+            displayMessages(data);
+            if (data.result!="OK") {
             displayResultStatus(data.result);
+    }
     }
     );
 }
 
 $("#message-clear").click(function(){
     $.get('/api/wall/clear', function(data){
-          dislayMessages(data);
+          displayMessages(data);
           displayResultStatus(data.result);
     });
 });
 
-function dislayMessages(data){
+function displayMessages(data){
       console.log(data);
         $("#message-container").empty();
 
@@ -115,3 +117,12 @@ function dislayMessages(data){
                 message_text + '</li>');
         }
 }
+
+
+$("#affirmation-button").click (
+    function (evt) {
+        $.get("/grab/an/aff", function(data){
+            $("#affirmation-container").text(data);
+
+        });
+    });

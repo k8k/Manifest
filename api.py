@@ -9,6 +9,7 @@ to use client-side session systems, this stores things there.
 
 from flask import session
 from HTMLParser import HTMLParser
+import random
 
 # So that you can play with the `get` API, we return a single
 # test message as the default.
@@ -59,7 +60,7 @@ def wall_add(msg):
     session.setdefault('wall', []).append(wall_dict)
 
     result = wall_list()
-    result["result"] = "Message Received"
+    result["result"] = "Destiny Manifested"
 
     return result
 
@@ -75,3 +76,15 @@ class RemoveHTML(HTMLParser):
     out = ""
     def handle_data(self,data):
         self.out = self.out + data
+
+
+
+
+
+
+
+
+
+
+
+
